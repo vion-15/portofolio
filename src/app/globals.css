@@ -1,26 +1,120 @@
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant light (&:where(.light, .light *));
+
+@theme {
+  --color-accent-50: #eff6ff;
+  --color-accent-400: #60a5fa;
+  --color-accent-500: #3b82f6;
+  --color-accent-600: #2563eb;
+  --color-accent-700: #1d4ed8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-slate-950);
+    color: var(--color-slate-300);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .light body {
+    background-color: white;
+    color: var(--color-slate-700);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent-500) 30%, transparent);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 150ms ease;
+    outline: none;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-accent-400);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent-600);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-700);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--color-slate-700);
+    color: var(--color-slate-200);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--color-accent-400);
+    color: var(--color-accent-400);
+  }
+
+  .light .btn-outline {
+    border-color: var(--color-slate-300);
+    color: var(--color-slate-700);
+  }
+
+  .light .btn-outline:hover {
+    border-color: var(--color-accent-500);
+    color: var(--color-accent-600);
+  }
+
+  .chip {
+    border-radius: 9999px;
+    background-color: color-mix(in srgb, var(--color-accent-500) 10%, transparent);
+    padding: 0.25rem 0.75rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--color-accent-400);
+  }
+
+  .light .chip {
+    background-color: var(--color-accent-50);
+    color: var(--color-accent-700);
+  }
+
+  .card {
+    border: 1px solid var(--color-slate-800);
+    border-radius: 0.75rem;
+    background-color: var(--color-slate-900);
+    padding: 1.5rem;
+    transition: all 150ms ease;
+  }
+
+  .card:hover {
+    border-color: var(--color-accent-500);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .light .card {
+    border-color: var(--color-slate-200);
+    background-color: white;
+  }
+
+  .light .card:hover {
+    border-color: var(--color-accent-400);
+  }
 }
